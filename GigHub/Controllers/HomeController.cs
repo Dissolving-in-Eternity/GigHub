@@ -1,14 +1,15 @@
-﻿using System;
-using System.Web.Mvc;
-using GigHub.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Mvc;
+using GigHub.Models;
+using GigHub.ViewModels;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public HomeController()
         {
@@ -22,7 +23,13 @@ namespace GigHub.Controllers
                 .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now);
 
-            return View(upcomingGigs);
+            var viewModel = new HomeViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                ShowActions = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()
