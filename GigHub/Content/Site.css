@@ -181,3 +181,8 @@ h6,
 .gigs > li:hover .actions {
     display: block;
 }
+
+ul.notifications {
+    list-style: none;
+    padding-left: 0;
+}
