@@ -1,4 +1,5 @@
-﻿@model GigHub.ViewModels.GigsViewModel
+﻿@using Microsoft.AspNet.Identity
+@model GigHub.ViewModels.GigsViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -38,7 +39,19 @@
 
                     @if (Model.ShowActions)
                     {
-                        <button data-artist-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow">Follow</button>
+                        if (Model.Followings.Contains(gig.ArtistId))
+                        {
+                            <button data-artist-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow js-toggle-delete">
+                                Following 
+                            </button>
+                        }
+                        else
+                        {
+                            <button data-artist-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow js-toggle-add">
+                                Follow
+                            </button>  
+                        }
+                        
                     }
                 </span>
                 <span class="genre">
@@ -96,13 +109,33 @@
 
             $(".js-toggle-follow").click(function(e) {
                 var button = $(e.target);
-                $.post("/api/followings", { followeeId: button.attr("data-artist-id") })
-                    .done(function() {
-                        button.text("Following");
+                if (button.hasClass("js-toggle-add")) {
+                    $.post("/api/followings", { followeeId: button.attr("data-artist-id") })
+                        .done(function() {
+                            button
+                                .text("Following")
+                                .addClass("js-toggle-delete")
+                                .removeClass("js-toggle-add");
+                        })
+                        .fail(function() {
+                            alert("Something failed!");
+                        });
+                }
+                else {
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("data-artist-id"),
+                        method: "DELETE"
                     })
-                    .fail(function() {
-                        alert("Something failed!");
-                    });
+                        .done(function() {
+                            button
+                                .addClass("js-toggle-add")
+                                .removeClass("js-toggle-delete")
+                                .text("Follow");
+                        })
+                        .fail(function() {
+                            alert("Something failed!");
+                        });
+                }
             });
         });
     </script>
