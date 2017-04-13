@@ -125,7 +125,7 @@ h6,
 }
 .gigs > li {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .gigs > li .date {
   background: red;
@@ -157,7 +157,9 @@ h6,
   display: block;
 }
 .gigs > li .details .genre {
-  font-size: 15px;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
 }
 .gigs > li .actions {
   font-size: 15px;
