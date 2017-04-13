@@ -37,7 +37,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteFollowing(string id)
+        public IHttpActionResult Unfollow(string id)
         {
             var userId = User.Identity.GetUserId();
 
@@ -50,7 +50,7 @@ namespace GigHub.Controllers.Api
             _context.Followings.Remove(following);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(id);
         }
     }
 }

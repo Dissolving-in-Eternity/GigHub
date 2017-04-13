@@ -36,23 +36,6 @@
                     {
                         <span class="label label-warning">Canceled</span>
                     }
-
-                    @if (Model.ShowActions)
-                    {
-                        if (Model.Followings.Contains(gig.ArtistId))
-                        {
-                            <button data-artist-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow js-toggle-delete">
-                                Following 
-                            </button>
-                        }
-                        else
-                        {
-                            <button data-artist-id="@gig.ArtistId" class="btn btn-link btn-sm js-toggle-follow js-toggle-add">
-                                Follow
-                            </button>  
-                        }
-                        
-                    }
                 </span>
                 <span class="genre">
                     @gig.Genre.Name
@@ -77,36 +60,6 @@
         $(document).ready(function() {
             GigsController.init("#gigs");
 
-            $(".js-toggle-follow").click(function(e) {
-                var button = $(e.target);
-                if (button.hasClass("js-toggle-add")) {
-                    $.post("/api/followings", { followeeId: button.attr("data-artist-id") })
-                        .done(function() {
-                            button
-                                .text("Following")
-                                .addClass("js-toggle-delete")
-                                .removeClass("js-toggle-add");
-                        })
-                        .fail(function() {
-                            alert("Something failed!");
-                        });
-                }
-                else {
-                    $.ajax({
-                        url: "/api/followings/" + button.attr("data-artist-id"),
-                        method: "DELETE"
-                    })
-                        .done(function() {
-                            button
-                                .addClass("js-toggle-add")
-                                .removeClass("js-toggle-delete")
-                                .text("Follow");
-                        })
-                        .fail(function() {
-                            alert("Something failed!");
-                        });
-                }
-            });
         });
     </script>
 }
