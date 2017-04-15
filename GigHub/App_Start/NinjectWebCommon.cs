@@ -10,6 +10,7 @@ namespace GigHub.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Extensions.Conventions;
 
     public static class NinjectWebCommon 
     {
@@ -46,6 +47,16 @@ namespace GigHub.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                // Automatically scan assemblies, 
+                // find all interfaces and their implementations and bind them
+                kernel.Bind(x =>
+                {
+                    x.FromThisAssembly()
+                        .SelectAllClasses()
+                        .BindDefaultInterface();
+                });
+
                 return kernel;
             }
             catch
