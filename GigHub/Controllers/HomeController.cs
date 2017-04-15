@@ -1,8 +1,7 @@
-using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using GigHub.Models;
+using GigHub.Repositories;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 
@@ -11,18 +10,21 @@ namespace GigHub.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly GigRepository _gigRepository;
+        private readonly AttendanceRepository _attendanceRepository;
+        private readonly FollowingRepository _followingRepository;
 
         public HomeController()
         {
             _context = new ApplicationDbContext();
+            _gigRepository = new GigRepository(_context);
+            _attendanceRepository = new AttendanceRepository(_context);
+            _followingRepository = new FollowingRepository(_context);
         }
 
         public ActionResult Index(string query = null)
         {
-            var upcomingGigs = _context.Gigs
-                .Include(g => g.Artist)
-                .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);
+            var upcomingGigs = _gigRepository.GetUpcominGigs();
 
             if (!string.IsNullOrWhiteSpace(query))
             {
@@ -34,14 +36,6 @@ namespace GigHub.Controllers
             }
 
             var userId = User.Identity.GetUserId();
-            var attendances = _context.Attendances
-                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                .ToList()
-                .ToLookup(a => a.GigId);
-            var followings = _context.Followings
-                .Where(f => f.FollowerId == userId)
-                .ToList()
-                .ToLookup(f => f.FolloweeId);
 
             var viewModel = new GigsViewModel
             {
@@ -49,25 +43,13 @@ namespace GigHub.Controllers
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs",
                 SearchTerm = query,
-                Attendances = attendances,
-                Followings = followings
+                Attendances = _attendanceRepository.GetFutureAttendances(userId)
+                    .ToLookup(a => a.GigId),
+                Followings = _followingRepository.GetUserFollowings(userId)
+                    .ToLookup(f => f.FolloweeId)
             };
 
             return View("Gigs", viewModel);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
