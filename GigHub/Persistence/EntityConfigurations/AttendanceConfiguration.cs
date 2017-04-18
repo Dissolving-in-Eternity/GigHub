@@ -8,6 +8,10 @@ namespace GigHub.Persistence.EntityConfigurations
         public AttendanceConfiguration()
         {
             HasKey(a => new { a.GigId, a.AttendeeId });
+
+            HasRequired(a => a.Gig)
+                .WithMany(g => g.Attendances)
+                .WillCascadeOnDelete(false);
         }
     }
 }
