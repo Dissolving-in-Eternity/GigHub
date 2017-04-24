@@ -294,6 +294,10 @@
     <Compile Include="Persistence\Migrations\201704031908402_AddNotification.Designer.cs">
       <DependentUpon>201704031908402_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201704241438301_AddMoreGenres.cs" />
+    <Compile Include="Persistence\Migrations\201704241438301_AddMoreGenres.Designer.cs">
+      <DependentUpon>201704241438301_AddMoreGenres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
@@ -461,6 +465,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201704031908402_AddNotification.resx">
       <DependentUpon>201704031908402_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704241438301_AddMoreGenres.resx">
+      <DependentUpon>201704241438301_AddMoreGenres.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
