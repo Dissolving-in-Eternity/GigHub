@@ -5,9 +5,21 @@
 }
 
 <h2>Who I Follow</h2>
-<ul>
+<ul class="list-group">
     @foreach (var artist in Model)
     {
-        <li>@artist.Name</li>
+        <li class="list-group-item">
+            @artist.Name
+            <button data-user-id="@artist.Id" class="btn btn-info js-toggle-follow pull-right">Following</button>
+        </li>
     }
 </ul>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            GigDetailsController.init();
+        });
+    </script>
+}

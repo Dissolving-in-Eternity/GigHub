@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers
 {
+    [Authorize]
     public class FolloweesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
