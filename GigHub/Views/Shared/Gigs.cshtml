@@ -40,7 +40,7 @@
                 <span class="genre">
                     @gig.Genre.Name
                 </span>
-                    @if (Model.ShowActions && !gig.IsCanceled)
+                    @if (Model.ShowActions && !gig.IsCanceled && gig.ArtistId != User.Identity.GetUserId())
                     {
                         <button 
                             data-gig-id="@gig.Id"
