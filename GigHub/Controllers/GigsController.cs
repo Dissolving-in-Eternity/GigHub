@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
+using PagedList;
 
 namespace GigHub.Controllers
 {
@@ -25,13 +26,17 @@ namespace GigHub.Controllers
         }
 
         [Authorize]
-        public ActionResult Attending()
+        public ActionResult Attending(int? page)
         {
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+
             var userId = User.Identity.GetUserId();
+            var gigs = _unitOfWork.Gigs.GetGigsUserAttending(userId);
 
             var viewModel = new GigsViewModel
             {
-                UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
+                UpcomingGigs = gigs.ToPagedList(pageNumber, pageSize),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Gigs I'm Attending",
                 Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId),
