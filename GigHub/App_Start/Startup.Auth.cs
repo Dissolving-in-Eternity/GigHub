@@ -1,12 +1,11 @@
-﻿using System;
-using GigHub.Core.Models;
+﻿using GigHub.Core.Models;
 using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
+using System;
 
 namespace GigHub
 {

@@ -1,5 +1,8 @@
 ﻿namespace GigHub.Core.Models
 {
+    /// <summary>
+    /// Domain class. Represents Artist (Followee)-Follower relation
+    /// </summary>
     public class Following
     {
         public ApplicationUser Follower { get; set; }

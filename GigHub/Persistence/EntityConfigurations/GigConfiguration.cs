@@ -1,8 +1,11 @@
-using System.Data.Entity.ModelConfiguration;
 using GigHub.Core.Models;
+using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
+    /// <summary>
+    /// EF configuration settings for Gig class using Fluent API
+    /// </summary>
     public class GigConfiguration : EntityTypeConfiguration<Gig>
     {
         public GigConfiguration()

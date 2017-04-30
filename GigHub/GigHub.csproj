@@ -259,7 +259,7 @@
     <Compile Include="Persistence\EntityConfigurations\GigConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\NotificationConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\UserNotificationConfiguration.cs" />
-    <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Core\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201612272350386_InitialModel.cs" />
     <Compile Include="Persistence\Migrations\201612272350386_InitialModel.Designer.cs">
       <DependentUpon>201612272350386_InitialModel.cs</DependentUpon>
@@ -404,7 +404,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Gigs.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -431,7 +430,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>

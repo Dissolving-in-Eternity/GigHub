@@ -1,10 +1,16 @@
-﻿using System.Data.Entity;
+﻿using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Persistence.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace GigHub.Persistence
 {
+    /// <summary>
+    /// Manages the entity objects during run time, 
+    /// which includes populating objects with data from a database, 
+    /// change tracking, and persisting data to the database
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Gig> Gigs { get; set; }
@@ -26,6 +32,7 @@ namespace GigHub.Persistence
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Add Fluent API configurations for EF
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new AttendanceConfiguration());
             modelBuilder.Configurations.Add(new FollowingConfiguration());

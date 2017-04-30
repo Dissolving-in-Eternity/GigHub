@@ -1,6 +1,6 @@
-﻿using System.Web.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http;
 
 namespace GigHub
 {
@@ -8,6 +8,7 @@ namespace GigHub
     {
         public static void Register(HttpConfiguration config)
         {
+            // Configure settings for Camel Case 
             var settings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;

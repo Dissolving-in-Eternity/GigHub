@@ -8,6 +8,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using GigHub.Core;
 
 namespace GigHub.Tests.Persistence.Repositories
 {

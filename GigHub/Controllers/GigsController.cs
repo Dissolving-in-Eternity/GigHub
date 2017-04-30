@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Linq;
-using System.Web.Mvc;
-using GigHub.Core;
+﻿using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
+using Microsoft.AspNet.Identity;
 using PagedList;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
+    /// <summary>
+    /// Manages gigs (CRUD + filtering)
+    /// </summary>
     public class GigsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -17,6 +20,10 @@ namespace GigHub.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Gets a set of gigs user attending
+        /// </summary>
+        /// <returns>Gigs/Mine.cshtml populated with upcoming gigs for the current user</returns>
         [Authorize]
         public ViewResult Mine()
         {
@@ -25,6 +32,11 @@ namespace GigHub.Controllers
             return View(gigs);
         }
 
+        /// <summary>
+        /// Manages 'Gigs I'm attending' page
+        /// </summary>
+        /// <param name="page">Current page number</param>
+        /// <returns>Gigs.chtml populated with gigs user attending</returns>
         [Authorize]
         public ActionResult Attending(int? page)
         {
@@ -46,6 +58,11 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
+        /// <summary>
+        /// Edit gig details
+        /// </summary>
+        /// <param name="id">Gig Id</param>
+        /// <returns>GigForm.cshtml populated with initial gig data</returns>
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -71,6 +88,12 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        /// <summary>
+        /// Save modified gig details
+        /// Extract data from view model and add it to the db
+        /// </summary>
+        /// <param name="viewModel">Modified view model</param>
+        /// <returns>Redirect to 'My upcoming gigs'</returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -109,6 +132,12 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        /// <summary>
+        /// Create a gig
+        /// Extract data from view model and add it to the db
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns>Redirect to 'My upcoming gigs'</returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,12 +163,22 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
+        /// <summary>
+        /// Pass query string to Home controller
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns>Redirect to Home/Index action</returns>
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
         {
             return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
+        /// <summary>
+        /// View gig details
+        /// </summary>
+        /// <param name="id">Gig Id</param>
+        /// <returns>Details view</returns>
         public ActionResult Details(int id)
         {
             var gig = _unitOfWork.Gigs.GetGig(id);

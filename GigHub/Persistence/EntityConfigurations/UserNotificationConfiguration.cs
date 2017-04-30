@@ -3,6 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
+    /// <summary>
+    /// EF configuration settings for UserNotification class using Fluent API
+    /// </summary>
     public class UserNotificationConfiguration : EntityTypeConfiguration<UserNotification>
     {
         public UserNotificationConfiguration()

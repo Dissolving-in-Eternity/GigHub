@@ -1,5 +1,8 @@
 ﻿namespace GigHub.Core.Models
 {
+    /// <summary>
+    /// Domain class. Represents Gig-Attendee relation
+    /// </summary>
     public class Attendance
     {
         public Gig Gig { get; set; }

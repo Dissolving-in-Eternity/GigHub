@@ -1,9 +1,12 @@
-﻿using System.Web.Mvc;
-using GigHub.Core;
+﻿using GigHub.Core;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
+    /// <summary>
+    /// Manages 'Who I Follow' page 
+    /// </summary>
     [Authorize]
     public class FolloweesController : Controller
     {
@@ -14,6 +17,10 @@ namespace GigHub.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Gets artists followed by currently logged in user
+        /// </summary>
+        /// <returns>Followees/Index.cshtml populated with followees</returns>
         public ActionResult Index()
         {
             var artists = _unitOfWork.Users.GetArtistsFollowedBy(User.Identity.GetUserId());

@@ -1,12 +1,16 @@
-﻿using System;
+﻿using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Core.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using GigHub.Core.Models;
-using GigHub.Core.Repositories;
 
 namespace GigHub.Persistence.Repositories
 {
+    /// <summary>
+    /// Contains queries for Gig class. Implements Repository pattern.
+    /// </summary>
     public class GigRepository : IGigRepository
     {
         private readonly IApplicationDbContext _context;

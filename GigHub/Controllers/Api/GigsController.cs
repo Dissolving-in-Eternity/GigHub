@@ -1,9 +1,12 @@
-﻿using System.Web.Http;
-using GigHub.Core;
+﻿using GigHub.Core;
 using Microsoft.AspNet.Identity;
+using System.Web.Http;
 
 namespace GigHub.Controllers.Api
 {
+    /// <summary>
+    /// RESTfull API, which allows to cancel a gig
+    /// </summary>
     [Authorize]
     public class GigsController : ApiController
     {
@@ -14,6 +17,15 @@ namespace GigHub.Controllers.Api
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Cancel specific gig for currently logged in user
+        /// </summary>
+        /// <param name="id">Gig Id</param>
+        /// <returns>
+        /// NotFound, if gig doesn't exist or already cancelled
+        /// Unauhorised, if id of the current user doen't correspond the id of user created a gig
+        /// OkResult if gig succesfully cancelled
+        /// </returns>
         [HttpDelete]
         public IHttpActionResult Cancel(int id)
         {

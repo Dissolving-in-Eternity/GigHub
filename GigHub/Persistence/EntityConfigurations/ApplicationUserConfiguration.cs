@@ -3,6 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
+    /// <summary>
+    /// EF configuration settings for ApplicationUser class using Fluent API
+    /// </summary>
     public class ApplicationUserConfiguration : EntityTypeConfiguration<ApplicationUser>
     {
         public ApplicationUserConfiguration()

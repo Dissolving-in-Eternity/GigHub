@@ -1,11 +1,14 @@
-using System.Web.Http;
 using GigHub.Core;
 using GigHub.Core.Dtos;
 using GigHub.Core.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.Http;
 
 namespace GigHub.Controllers.Api
 {
+    /// <summary>
+    /// RESTful API which allows to follow an artist or delete following
+    /// </summary>
     [Authorize]
     public class FollowingsController : ApiController
     {
@@ -16,6 +19,12 @@ namespace GigHub.Controllers.Api
             _unitOfWork = unitOfWork;
         }
 
+        // POST api/followings
+        /// <summary>
+        /// Create following for currently logged in user
+        /// </summary>
+        /// <param name="dto">data transfer object for Followee Id (Artist Id)</param>
+        /// <returns>BadRequest if following already exists, OkResult otherwise</returns>
         [HttpPost]
         public IHttpActionResult Follow(FollowingDto dto)
         {
@@ -38,6 +47,12 @@ namespace GigHub.Controllers.Api
             return Ok();
         }
 
+        // DELETE api/followings
+        /// <summary>
+        /// Delete specific following for currently logged in user
+        /// </summary>
+        /// <param name="id">Artist Id</param>
+        /// <returns>NotFound, if following doesn't exist, OkResult with deleted artist id otherwise</returns>
         [HttpDelete]
         public IHttpActionResult Unfollow(string id)
         {

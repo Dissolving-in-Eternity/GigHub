@@ -3,6 +3,9 @@ using GigHub.Core.Models;
 
 namespace GigHub.Core.Dtos
 {
+    /// <summary>
+    /// Data transfer object for Notification class
+    /// </summary>
     public class NotificationDto
     {
         public DateTime DateTime { get; set; }

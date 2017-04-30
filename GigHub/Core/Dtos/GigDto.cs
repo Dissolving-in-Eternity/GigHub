@@ -2,6 +2,9 @@
 
 namespace GigHub.Core.Dtos
 {
+    /// <summary>
+    /// Data transfer object for Gig class
+    /// </summary>
     public class GigDto
     {
         public int Id { get; set; }

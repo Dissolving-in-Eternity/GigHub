@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace GigHub.Core.Models
 {
+    /// <summary>
+    /// Domain class. Represents a Gig and provides editing functional for an instance
+    /// </summary>
     public class Gig
     {
         public int Id { get; set; }

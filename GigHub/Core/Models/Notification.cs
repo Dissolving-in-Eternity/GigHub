@@ -2,6 +2,12 @@
 
 namespace GigHub.Core.Models
 {
+    /// <summary>
+    /// Domain class. Contains reference to Gig. 
+    /// Responsible for creation of a new Gig object in case of 
+    /// modification/deletion of already existing gig
+    /// or creation of a new one.
+    /// </summary>
     public class Notification
     {
         public int Id { get; private set; }

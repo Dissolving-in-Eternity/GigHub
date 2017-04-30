@@ -2,6 +2,9 @@
 
 namespace GigHub.Core.Models
 {
+    /// <summary>
+    /// Domain class. Responsible for notifying a user about gig's addition/modification/deletion
+    /// </summary>
     public class UserNotification
     {
         public string UserId { get; private set; }

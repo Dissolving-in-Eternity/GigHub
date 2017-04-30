@@ -3,6 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
+    /// <summary>
+    /// EF configuration settings for Attendance class using Fluent API
+    /// </summary>
     public class AttendanceConfiguration : EntityTypeConfiguration<Attendance>
     {
         public AttendanceConfiguration()

@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GigHub.Core.Models;
+﻿using GigHub.Core.Models;
 using GigHub.Core.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GigHub.Persistence.Repositories
 {
+    /// <summary>
+    /// Contains queries for UserNotification class. Implements Repository pattern.
+    /// </summary>
     public class UserNotificationRepository : IUserNotificationRepository
     {
         private readonly ApplicationDbContext _context;
