@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GigHub.Controllers;
+using GigHub.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using GigHub.Controllers;
-using GigHub.Core.Models;
 
 namespace GigHub.Core.ViewModels
 {
@@ -14,6 +14,9 @@ namespace GigHub.Core.ViewModels
 
         [Required]
         public string Venue { get; set; }
+
+        [Required]
+        public string City { get; set; }
 
         [Required] 
         [FutureDate]

@@ -177,8 +177,6 @@ h6,
 }
 
 .btn {
-    /*font-size: 17px;
-    padding: 7px 20px;*/
     -ms-border-radius: 9px;
     border-radius: 9px;
 }
@@ -189,7 +187,7 @@ h6,
 
     > li {
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
 
         .date {
             background: red;
@@ -198,6 +196,7 @@ h6,
             width: 60px;
             -ms-border-radius: 8px;
             border-radius: 8px;
+            margin-bottom: 3px;
 
             .month {
                 text-transform: uppercase;
@@ -217,17 +216,32 @@ h6,
         .details {
             position: absolute;
             top: 0;
-            left: 70px;
+            left: 80px;
 
             .artist {
+                display: block;
                 font-weight: bold;
+            }
+
+            .venue {
                 display: block;
             }
 
             .genre {
-                font-size: 14px;
                 display: block;
-                margin-bottom: 4px;
+                font-size: 12.2px;
+                margin-bottom: 10px;
+            }
+
+            .city {
+                display: block;
+                font-weight: bold;
+            }
+
+            .city-sml {
+                display: block;
+                font-size: 14.5px;
+                margin-bottom: 6px;
             }
         }
 

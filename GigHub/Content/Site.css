@@ -146,8 +146,6 @@ h6,
   box-shadow: none;
 }
 .btn {
-  /*font-size: 17px;
-    padding: 7px 20px;*/
   -ms-border-radius: 9px;
   border-radius: 9px;
 }
@@ -157,7 +155,7 @@ h6,
 }
 .gigs > li {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 .gigs > li .date {
   background: red;
@@ -166,6 +164,7 @@ h6,
   width: 60px;
   -ms-border-radius: 8px;
   border-radius: 8px;
+  margin-bottom: 3px;
 }
 .gigs > li .date .month {
   text-transform: uppercase;
@@ -182,16 +181,28 @@ h6,
 .gigs > li .details {
   position: absolute;
   top: 0;
-  left: 70px;
+  left: 80px;
 }
 .gigs > li .details .artist {
+  display: block;
   font-weight: bold;
+}
+.gigs > li .details .venue {
   display: block;
 }
 .gigs > li .details .genre {
-  font-size: 14px;
   display: block;
-  margin-bottom: 4px;
+  font-size: 12.2px;
+  margin-bottom: 10px;
+}
+.gigs > li .details .city {
+  display: block;
+  font-weight: bold;
+}
+.gigs > li .details .city-sml {
+  display: block;
+  font-size: 14.5px;
+  margin-bottom: 6px;
 }
 .gigs > li .actions {
   font-size: 15px;

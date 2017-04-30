@@ -13,7 +13,7 @@
 {
     <div class="form-group">
         <div id="searchGigs" class="input-group">
-            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, venue..." })
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city..." })
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-search"></i>
             </span>
@@ -34,23 +34,23 @@
             </div>
             <div class="details">
                 <span class="artist">
-                    <a href="@Url.Action("Details", "Gigs", new { id = gig.Id })">@gig.Artist.Name</a>
-                    
+                    <a href="@Url.Action("Details", "Gigs", new {id = gig.Id})">@gig.Artist.Name</a>
+
                     @if (gig.IsCanceled)
                     {
                         <span class="label label-warning">Canceled</span>
                     }
                 </span>
-                <span class="genre">
-                    @gig.Genre.Name
+                <span class="city-sml">
+                    @gig.City
                 </span>
                 @if (Model.ShowActions && !gig.IsCanceled && gig.ArtistId != User.Identity.GetUserId())
                 {
-                    <button 
+                    <button
                         data-gig-id="@gig.Id"
                         class="btn 
                                 @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") 
-                                btn-sm pull-left js-toggle-attendance">Going ?
+                                going btn-sm pull-left js-toggle-attendance">Going ?
                     </button>
                 }
             </div>

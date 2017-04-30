@@ -38,7 +38,7 @@ namespace GigHub.IntegrationTests.Controllers
             _controller.MockCurrentUser(user.Id, user.UserName);
 
             var genre = _context.Genres.First();
-            var gig = new Gig { Artist = user, DateTime = DateTime.Now.AddDays(1), Genre = genre, Venue = "-" };
+            var gig = new Gig { Artist = user, DateTime = DateTime.Now.AddDays(1), Genre = genre, Venue = "-", City = "-" };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
 
@@ -57,7 +57,7 @@ namespace GigHub.IntegrationTests.Controllers
             _controller.MockCurrentUser(user.Id, user.UserName);
 
             var genre = _context.Genres.Single(g => g.Id == 1);
-            var gig = new Gig { Artist = user, DateTime = DateTime.Now.AddDays(1), Genre = genre, Venue = "-" };
+            var gig = new Gig { Artist = user, DateTime = DateTime.Now.AddDays(1), Genre = genre, Venue = "-", City = "-" };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
 
@@ -68,6 +68,7 @@ namespace GigHub.IntegrationTests.Controllers
                 Date = DateTime.Now.AddMonths(1).ToString("d MMM yyyy"),
                 Time = "20:00",
                 Venue = "Venue",
+                City = "City",
                 Genre = 2
             });
 
@@ -75,6 +76,7 @@ namespace GigHub.IntegrationTests.Controllers
             _context.Entry(gig).Reload();
             gig.DateTime.Should().Be(DateTime.Today.AddMonths(1).AddHours(20));
             gig.Venue.Should().Be("Venue");
+            gig.City.Should().Be("City");
             gig.GenreId.Should().Be(2);
         }
     }

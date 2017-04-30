@@ -20,6 +20,10 @@ namespace GigHub.Persistence.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(255);
 
+            Property(g => g.City)
+                .IsRequired()
+                .HasMaxLength(255);
+
             HasMany(g => g.Attendances)
                 .WithRequired(a => a.Gig)
                 .WillCascadeOnDelete(false);

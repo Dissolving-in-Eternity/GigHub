@@ -18,14 +18,14 @@
                 </div>
             </div>
             <div class="details">
-                <span class="artist">
+                <span class="city">
+                    @gig.City
+                </span>
+                <span class="venue">
                     @gig.Venue
                 </span>
-                <span class="genre">
-                    @gig.Genre.Name
-                </span>
                 <div class="actions">
-                    <a href="@Url.Action("Edit", "Gigs", new { id = gig.Id })">Edit</a> | 
+                    <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">Edit</a> |
                     <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">Cancel</a>
                 </div>
             </div>

@@ -82,7 +82,8 @@ namespace GigHub.Controllers
                 Date = gig.DateTime.ToString("dd.MM.yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
                 Genre = gig.GenreId,
-                Venue = gig.Venue
+                Venue = gig.Venue,
+                City = gig.City
             };
         
             return View("GigForm", viewModel);
@@ -113,7 +114,7 @@ namespace GigHub.Controllers
             if(gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
 
-            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
+            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre, viewModel.City);
 
             _unitOfWork.Complete();
 
@@ -154,7 +155,8 @@ namespace GigHub.Controllers
                 ArtistId = User.Identity.GetUserId(),
                 DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
-                Venue = viewModel.Venue
+                Venue = viewModel.Venue,
+                City = viewModel.City
             };
 
             _unitOfWork.Gigs.Add(gig);
