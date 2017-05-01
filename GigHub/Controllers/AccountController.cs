@@ -148,7 +148,7 @@ namespace GigHub.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -156,11 +156,22 @@ namespace GigHub.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    Name = model.Name
+                    Name = model.Name,
+                    IsGroupRepresentative = model.IsGroupRepresentative,
+                    ArtistInfo = model.ArtistInfo
                 };
+
+                using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                {
+                    user.Image = reader.ReadBytes(upload.ContentLength);
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(model.IsGroupRepresentative)
+                        UserManager.AddToRole(user.Id, "GroupManager");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

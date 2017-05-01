@@ -312,6 +312,10 @@
     <Compile Include="Persistence\Migrations\201705011416468_SeedAdmin.Designer.cs">
       <DependentUpon>201705011416468_SeedAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201705011449373_ExtendApplicationUser.cs" />
+    <Compile Include="Persistence\Migrations\201705011449373_ExtendApplicationUser.Designer.cs">
+      <DependentUpon>201705011449373_ExtendApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
@@ -487,6 +491,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201705011416468_SeedAdmin.resx">
       <DependentUpon>201705011416468_SeedAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705011449373_ExtendApplicationUser.resx">
+      <DependentUpon>201705011449373_ExtendApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
