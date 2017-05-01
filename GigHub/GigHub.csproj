@@ -308,6 +308,10 @@
     <Compile Include="Persistence\Migrations\201704301754457_AddCityToGigs.Designer.cs">
       <DependentUpon>201704301754457_AddCityToGigs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201705011416468_SeedAdmin.cs" />
+    <Compile Include="Persistence\Migrations\201705011416468_SeedAdmin.Designer.cs">
+      <DependentUpon>201705011416468_SeedAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
@@ -480,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201704301754457_AddCityToGigs.resx">
       <DependentUpon>201704301754457_AddCityToGigs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705011416468_SeedAdmin.resx">
+      <DependentUpon>201705011416468_SeedAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
