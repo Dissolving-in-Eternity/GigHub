@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -161,15 +162,16 @@ namespace GigHub.Controllers
                     ArtistInfo = model.ArtistInfo
                 };
 
-                using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                {
-                    user.Image = reader.ReadBytes(upload.ContentLength);
-                }
+                if(upload != null)
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        user.Image = reader.ReadBytes(upload.ContentLength);
+                    }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    if(model.IsGroupRepresentative)
+                    if (model.IsGroupRepresentative)
                         UserManager.AddToRole(user.Id, "GroupManager");
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
