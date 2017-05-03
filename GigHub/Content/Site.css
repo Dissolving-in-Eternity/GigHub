@@ -119,6 +119,11 @@ footer {
 .navbar-brand {
   font-weight: 700;
 }
+.navbar-brand img {
+  width: 19px;
+  height: 19px;
+  margin-top: -3px;
+}
 body {
   font-size: 17px;
 }
