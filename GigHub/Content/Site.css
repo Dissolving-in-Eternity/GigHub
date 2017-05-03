@@ -1,4 +1,10 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿body {
+  background-image: url(/Content/images/gplaypattern.png);
+  /*margin: 0;
+    background-size: cover;
+    background-repeat:  round;*/
+}
+/* Set padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
   padding-right: 15px;
