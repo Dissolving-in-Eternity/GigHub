@@ -236,3 +236,61 @@ h6,
 #searchGigs input {
   max-width: none;
 }
+/* Gig Details */
+#artistHeading h2 {
+  margin-bottom: -5px;
+}
+#artistInfo {
+  float: left;
+  display: inline-block;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+#artistInfo #artistImg {
+  float: left;
+}
+#artistInfo #artistText {
+  float: right;
+  width: 500px;
+}
+#artistInfo #artistText p {
+  float: right;
+  display: block;
+  margin-left: 40px;
+}
+div.center-cropped {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+div.center-cropped img {
+  height: 100%;
+  min-width: 100%;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+#gigDetails {
+  clear: both;
+}
+#gigDetails button {
+  height: 40px;
+  width: 80px;
+  font-size: 14px;
+}
+/*DL, DT, DD TAGS LIST DATA*/
+dl {
+  margin-bottom: 20px;
+}
+dl dt {
+  float: left;
+  font-weight: bold;
+  margin-right: 0px;
+  padding: 5px;
+  width: 70px;
+}
+dl dd {
+  margin: 2px 0;
+  padding: 5px 0;
+}

@@ -28,6 +28,7 @@ namespace GigHub.Core.ViewModels
         public bool IsGroupRepresentative { get; set; }
 
         [Display(Name = "Group Info")]
+        [StringLength(800)]
         public string ArtistInfo { get; set; }
 
         [Display(Name = "Group Image")]

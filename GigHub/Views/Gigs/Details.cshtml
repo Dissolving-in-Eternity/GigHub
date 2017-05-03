@@ -5,32 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>
-    
-    @Model.Gig.Artist.Name
-    @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != User.Identity.GetUserId())
-    {
-        if (Model.IsFollowing)
+<div id="artistHeading">
+    <h2>
+        @Model.Gig.Artist.Name
+        @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != User.Identity.GetUserId())
         {
-            <button data-user-id="@Model.Gig.ArtistId" class="btn btn-info js-toggle-follow">Following</button>
+            if (Model.IsFollowing)
+            {
+                <button data-user-id="@Model.Gig.ArtistId" class="btn btn-info js-toggle-follow">Following</button>
+            }
+            else
+            {
+                <button data-user-id="@Model.Gig.ArtistId" class="btn btn-default js-toggle-follow">Follow</button>
+            }
         }
-        else
-        {
-            <button data-user-id="@Model.Gig.ArtistId" class="btn btn-default js-toggle-follow">Follow</button>
-        }
-    }
-</h2>
-<p>Performing in @Model.Gig.City at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")</p>
-@if (User.Identity.IsAuthenticated && Model.IsAttending)
-{
-    <p>You are going to this event.</p>
-}
+    </h2>
+    <label class="label label-default">@Model.Gig.Genre.Name</label>
+</div>
 
+<div id="artistInfo">
+    <div id="artistImg" class="center-cropped">
+        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Gig.Artist.Image)" />
+    </div>
+    <div id="artistText">
+        <p>@Model.Gig.Artist.ArtistInfo</p>
+    </div>
+</div>
+
+<div id="gigDetails">
+    <div class="alert alert-info">Gig Details</div>
+    <dl>
+        <dt>Where:</dt>
+        <dd>@Model.Gig.City, @Model.Gig.Venue</dd>
+        <dt>When:</dt>
+        <dd>@Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")</dd>
+    </dl>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button
+            data-gig-id="@Model.Gig.Id"
+            class="btn @(Model.IsAttending ? "btn-info" : "btn-default") 
+            going pull-left js-toggle-attendance">Going ?
+        </button>
+    }
+</div>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
+            GigsController.init("#gigDetails");
             GigDetailsController.init();
         });
     </script>
