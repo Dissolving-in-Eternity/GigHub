@@ -40,7 +40,7 @@
         <dt>When:</dt>
         <dd>@Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")</dd>
     </dl>
-    @if (User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated && !User.IsInRole("GroupManager") && !Model.Gig.IsCanceled)
     {
         <button
             data-gig-id="@Model.Gig.Id"

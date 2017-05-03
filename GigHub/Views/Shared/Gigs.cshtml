@@ -41,18 +41,12 @@
                         <span class="label label-warning">Canceled</span>
                     }
                 </span>
+                <span class="genre label label-default">
+                    @gig.Genre.Name
+                </span>
                 <span class="city-sml">
                     @gig.City
                 </span>
-                @if (Model.ShowActions && !gig.IsCanceled && gig.ArtistId != User.Identity.GetUserId())
-                {
-                    <button
-                        data-gig-id="@gig.Id"
-                        class="btn 
-                                @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") 
-                                going btn-sm pull-left js-toggle-attendance">Going ?
-                    </button>
-                }
             </div>
         </li>
     }
@@ -66,13 +60,4 @@
 else
 {
     @Html.PagedListPager(Model.UpcomingGigs, page => Url.Action("Attending", "Gigs", new {page}))
-}
-
-@section scripts
-{
-    <script>
-        $(document).ready(function() {
-            GigsController.init("#gigs");
-        });
-    </script>
 }
