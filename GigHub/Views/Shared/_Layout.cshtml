@@ -129,7 +129,7 @@
                     function(notifications) {
                         $(".notifications").popover({
                             html: true,
-                            title: "Recent Notifications",
+                            title: notifications.count > 0 ? "Recent Notifications" : "No Recent Notifications",
                             content: function() {
                                 // Get generated html for notifications
                                 var compiled = _.template($("#notifications-template").html());

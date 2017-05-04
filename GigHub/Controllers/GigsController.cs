@@ -40,7 +40,7 @@ namespace GigHub.Controllers
         [Authorize]
         public ActionResult Attending(int? page)
         {
-            int pageSize = 5;
+            int pageSize = 4;
             int pageNumber = page ?? 1;
 
             var userId = User.Identity.GetUserId();

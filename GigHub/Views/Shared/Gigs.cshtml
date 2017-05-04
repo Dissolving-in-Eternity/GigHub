@@ -13,7 +13,7 @@
 {
     <div class="form-group">
         <div id="searchGigs" class="input-group">
-            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city..." })
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city...", autofocus = "autofocus" })
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-search"></i>
             </span>

@@ -27,7 +27,7 @@ namespace GigHub.Controllers
         /// <returns>Gigs.chtml populated with gigs</returns>
         public ActionResult Index(int? page, string query = null)
         {
-            int pageSize = 5;
+            int pageSize = 4;
             int pageNumber = page ?? 1;
 
             var upcomingGigs = _unitOfWork.Gigs.GetUpcominGigs(query);
