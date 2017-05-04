@@ -150,16 +150,24 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
+            var userId = User.Identity.GetUserId();
             var gig = new Gig
             {
-                ArtistId = User.Identity.GetUserId(),
+                ArtistId = userId,
                 DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue,
-                City = viewModel.City
+                City = viewModel.City,
             };
 
             _unitOfWork.Gigs.Add(gig);
+
+            // Get followers for the current group
+            var followers = _unitOfWork.Users.GetFollowersFor(userId);
+            // Notify all followers about new gig creation
+            if(followers != null)
+                gig.Create(followers);
+
             _unitOfWork.Complete();
 
             return RedirectToAction("Mine", "Gigs");

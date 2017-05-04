@@ -28,12 +28,14 @@ namespace GigHub.Controllers.Api
         /// Get new notifications for currently logged in user
         /// </summary>
         /// <returns>Set of notifications</returns>
-        public IEnumerable<NotificationDto> GetNewNotifications()
+        public IEnumerable<NotificationDto> GetNewNotifications(bool isNewNotificationsRequired)
         {
             var userId = User.Identity.GetUserId();
 
-            var notifications = _unitOfWork.Notifications.GetNewNotificationsFor(userId);
-            
+            var notifications = isNewNotificationsRequired ?
+                _unitOfWork.Notifications.GetNewNotificationsFor(userId) :
+                _unitOfWork.Notifications.GetRecentNotificationsFor(userId);
+
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
 

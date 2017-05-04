@@ -24,5 +24,13 @@ namespace GigHub.Persistence.Repositories
                 .Select(f => f.Followee)
                 .ToList();
         }
+
+        public IEnumerable<ApplicationUser> GetFollowersFor(string groupId)
+        {
+            return _context.Followings
+                .Where(f => f.FolloweeId == groupId)
+                .Select(f => f.Follower)
+                .ToList();
+        }
     }
 }

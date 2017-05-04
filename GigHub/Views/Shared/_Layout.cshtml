@@ -79,6 +79,9 @@
                             <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
                     <%
                     }
+                        else if (notification.type == 3) { %>
+                            <li><span class="highlight"><%= notification.gig.artist.name %></span> has created the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
+                        <% } 
                 })
                 %>
         </ul>
@@ -86,10 +89,11 @@
 
     <script>
         $(document).ready(function() {
-            $.getJSON("/api/notifications",
+            $.getJSON("/api/notifications/?isNewNotificationsRequired=true",
                 function(notifications) {
-                    if (notifications.length == 0)
+                    if (notifications.length == 0) {
                         return;
+                    };
 
                     $(".js-notifications-count")
                         .text(notifications.length)
@@ -98,7 +102,7 @@
 
                     $(".notifications").popover({
                         html: true,
-                        title: "Notifications",
+                        title: "New Notifications",
                         content: function() {
                             // Get generated html for notifications
                             var compiled = _.template($("#notifications-template").html());
@@ -117,6 +121,26 @@
                                 });
                         });
                 });
+
+            // If no new notifications found, show the old ones
+            if ($(".js-notifications-count").text(""))
+            {
+                $.getJSON("/api/notifications/?isNewNotificationsRequired=false",
+                    function(notifications) {
+                        $(".notifications").popover({
+                            html: true,
+                            title: "Recent Notifications",
+                            content: function() {
+                                // Get generated html for notifications
+                                var compiled = _.template($("#notifications-template").html());
+                                return compiled({ notifications: notifications });
+                            },
+                            placement: "bottom",
+                            template:
+                                '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                        });
+                    });
+            }
 
         });
     </script>

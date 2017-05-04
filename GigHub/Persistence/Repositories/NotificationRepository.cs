@@ -25,6 +25,18 @@ namespace GigHub.Persistence.Repositories
                 .Where(un => un.UserId == userId && !un.IsRead)
                 .Select(un => un.Notification)
                 .Include(n => n.Gig.Artist)
+                .OrderByDescending(d => d.DateTime)
+                .ToList();
+        }
+
+        public IEnumerable<Notification> GetRecentNotificationsFor(string userId)
+        {
+            return _context.UserNotifications
+                .Where(un => un.UserId == userId)
+                .Select(un => un.Notification)
+                .Include(n => n.Gig.Artist)
+                .OrderByDescending(d => d.DateTime)
+                .Take(4)
                 .ToList();
         }
     }

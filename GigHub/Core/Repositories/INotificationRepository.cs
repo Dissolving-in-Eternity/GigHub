@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using GigHub.Core.Models;
+﻿using GigHub.Core.Models;
+using System.Collections.Generic;
 
 namespace GigHub.Core.Repositories
 {
     public interface INotificationRepository
     {
         IEnumerable<Notification> GetNewNotificationsFor(string userId);
+        IEnumerable<Notification> GetRecentNotificationsFor(string userId);
     }
 }
