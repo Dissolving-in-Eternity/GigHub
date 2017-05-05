@@ -45,7 +45,7 @@ namespace GigHub.Persistence.Repositories
                         g.City.Contains(searchTerm));
             }
 
-            return upcomingGigs.ToList();
+            return upcomingGigs.OrderBy(g => g.DateTime).ToList();
         }
 
         public IEnumerable<Gig> GetUpcomingGigsByArtist(string userId)
@@ -56,6 +56,7 @@ namespace GigHub.Persistence.Repositories
                     g.DateTime > DateTime.Now &&
                     !g.IsCanceled)
                 .Include(g => g.Genre)
+                .OrderBy(g => g.DateTime)
                 .ToList();
         }
 
@@ -73,6 +74,7 @@ namespace GigHub.Persistence.Repositories
                 .Select(a => a.Gig)
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
+                .OrderBy(g => g.DateTime)
                 .ToList();
         }
 
