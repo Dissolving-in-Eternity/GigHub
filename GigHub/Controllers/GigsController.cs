@@ -163,7 +163,7 @@ namespace GigHub.Controllers
             _unitOfWork.Gigs.Add(gig);
 
             // Get followers for the current group
-            var followers = _unitOfWork.Users.GetFollowersFor(userId);
+            var followers = _unitOfWork.Users.GetFollowersWithMatchingCityFor(userId, viewModel.City);
             // Notify all followers about new gig creation
             if(followers != null)
                 gig.Create(followers);

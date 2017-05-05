@@ -6,6 +6,6 @@ namespace GigHub.Core.Repositories
     public interface IApplicationUserRepository
     {
         IEnumerable<ApplicationUser> GetArtistsFollowedBy(string userId);
-        IEnumerable<ApplicationUser> GetFollowersFor(string userId);
+        IEnumerable<ApplicationUser> GetFollowersWithMatchingCityFor(string userId, string city);
     }
 }
