@@ -1,8 +1,5 @@
 ﻿body {
   background-image: url(/Content/images/gplaypattern.png);
-  /*margin: 0;
-    background-size: cover;
-    background-repeat:  round;*/
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -329,4 +326,31 @@ dl dt {
 dl dd {
   margin: 2px 0;
   padding: 5px 0;
+}
+/* Home */
+#homeLeft {
+  display: inline-block;
+  float: left;
+}
+.homeRight {
+  display: inline-block;
+  float: right;
+  margin-top: 70px;
+}
+.homeRight img {
+  width: 600px;
+  height: 370px;
+}
+.homeRight .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.homeRight .carousel-caption h2 {
+  display: block;
+  margin-bottom: 25px;
+  margin-top: 8px;
+}
+.homeRight .carousel-caption p {
+  font-size: 18px;
 }
