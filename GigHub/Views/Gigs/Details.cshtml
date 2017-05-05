@@ -8,7 +8,7 @@
 <div id="artistHeading">
     <h2>
         @Model.Gig.Artist.Name
-        @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != User.Identity.GetUserId())
+        @if (User.Identity.IsAuthenticated && !User.IsInRole("GroupManager"))
         {
             if (Model.IsFollowing)
             {

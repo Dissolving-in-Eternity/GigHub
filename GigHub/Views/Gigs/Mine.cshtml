@@ -5,33 +5,43 @@
 }
 
 <h1>My Upcoming Gigs</h1>
-<ul class="gigs voffset4">
-    @foreach (var gig in Model)
-    {
-        <li>
-            <div class="date">
-                <div class="month">
-                    @gig.DateTime.ToString("MMM")
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You <strong>don't have any upcoming gigs</strong> yet. 
+        You can <a href="/Gigs/Create">add a gig</a> here.
+    </div>
+}
+else
+{
+    <ul class="gigs voffset4">
+        @foreach (var gig in Model)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @gig.DateTime.ToString("MMM")
+                    </div>
+                    <div class="day">
+                        @gig.DateTime.ToString("dd")
+                    </div>
                 </div>
-                <div class="day">
-                    @gig.DateTime.ToString("dd")
+                <div class="details">
+                    <span class="city">
+                        @gig.City
+                    </span>
+                    <span class="venue">
+                        @gig.Venue
+                    </span>
+                    <div class="actions">
+                        <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">Edit</a> |
+                        <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">Cancel</a>
+                    </div>
                 </div>
-            </div>
-            <div class="details">
-                <span class="city">
-                    @gig.City
-                </span>
-                <span class="venue">
-                    @gig.Venue
-                </span>
-                <div class="actions">
-                    <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">Edit</a> |
-                    <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">Cancel</a>
-                </div>
-            </div>
-        </li>
-    }
-</ul>
+            </li>
+        }
+    </ul>
+}
 
 @section scripts
 {

@@ -10,11 +10,22 @@
     <p class="alert alert-info">All fields are <strong >required</strong>.</p>
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
-    <div class="form-group">
-        @Html.LabelFor(m => m.City)
-        @Html.TextBoxFor(m => m.City, new { @class = "form-control", autofocus = "autofocus" })
-        @Html.ValidationMessageFor(m => m.City)
-    </div>
+    if (Model.Action == "Update")
+     {
+         <div class="alert alert-warning">
+             <strong>Modification of 'City' is forbidden.</strong> 
+             In case of city change, <a href="#" class="js-cancel-gig" data-gig-id="@Model.Id">cancel</a> the gig and create 
+             <strong>a new one</strong>. 
+         </div>
+     }
+    if (Model.Action != "Update")
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.City)
+            @Html.TextBoxFor(m => m.City, new {@class = "form-control", autofocus = "autofocus"})
+            @Html.ValidationMessageFor(m => m.City)
+        </div>
+    }
     <div class="form-group">
         @Html.LabelFor(m => m.Venue)
         @Html.TextBoxFor(m => m.Venue, new { @class = "form-control" })
@@ -35,10 +46,48 @@
         @Html.DropDownListFor(m => m.Genre, new SelectList(Model.Genres, "Id", "Name"), "", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Genre)
     </div>
-    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 }
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(document).ready(function() {
+        $(".js-cancel-gig").click(function (e) {
+            var link = $(e.target);
+
+            bootbox.dialog({
+                message: "Are you sure you want to cancel this gig?",
+                title: "Confirm",
+                buttons: {
+                    no: {
+                        label: "No",
+                        className: "btn-default",
+                        callback: function () {
+                            bootbox.hideAll();
+                        }
+                    },
+                    yes: {
+                        label: "Yes",
+                        className: "btn-danger",
+                        callback: function () {
+                            $.ajax({
+                                    url: "/api/gigs/" + link.attr("data-gig-id"),
+                                    method: "DELETE"
+                                })
+                                .done(function () {
+                                    window.location.replace("/Gigs/Create");
+                                })
+                                .fail(function () {
+                                    alert("Something failed!");
+                                });
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
 }

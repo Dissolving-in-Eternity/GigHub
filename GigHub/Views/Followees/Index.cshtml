@@ -5,15 +5,25 @@
 }
 
 <h2>Who I Follow</h2>
-<ul class="list-group">
-    @foreach (var artist in Model)
-    {
-        <li class="list-group-item">
-            @artist.Name
-            <button data-user-id="@artist.Id" class="btn btn-info js-toggle-follow pull-right">Following</button>
-        </li>
-    }
-</ul>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You <strong>don't have any followees</strong> yet. To follow an artist, go to gig details page of an artist you're interested in, and click 'Follow'.
+    </div>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var artist in Model)
+        {
+            <li class="list-group-item">
+                @artist.Name
+                <button data-user-id="@artist.Id" class="btn btn-info js-toggle-follow pull-right">Following</button>
+            </li>
+        }
+    </ul>
+}
 
 @section scripts
 {
