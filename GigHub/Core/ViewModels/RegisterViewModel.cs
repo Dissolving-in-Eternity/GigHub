@@ -24,6 +24,9 @@ namespace GigHub.Core.ViewModels
         [StringLength(100)]
         public string Name { get; set; }
 
+        [StringLength(100)]
+        public string City { get; set; }
+
         [Display(Name = "Group Representative?")]
         public bool IsGroupRepresentative { get; set; }
 

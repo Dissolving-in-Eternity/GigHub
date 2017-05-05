@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -159,7 +158,8 @@ namespace GigHub.Controllers
                     Email = model.Email,
                     Name = model.Name,
                     IsGroupRepresentative = model.IsGroupRepresentative,
-                    ArtistInfo = model.ArtistInfo
+                    ArtistInfo = model.ArtistInfo,
+                    City = model.City
                 };
 
                 if(upload != null)

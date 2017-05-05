@@ -317,6 +317,10 @@
     <Compile Include="Persistence\Migrations\201705011449373_ExtendApplicationUser.Designer.cs">
       <DependentUpon>201705011449373_ExtendApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201705051700069_AddCityToApplicationUser.cs" />
+    <Compile Include="Persistence\Migrations\201705051700069_AddCityToApplicationUser.Designer.cs">
+      <DependentUpon>201705051700069_AddCityToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
@@ -495,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201705011449373_ExtendApplicationUser.resx">
       <DependentUpon>201705011449373_ExtendApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201705051700069_AddCityToApplicationUser.resx">
+      <DependentUpon>201705051700069_AddCityToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

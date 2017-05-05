@@ -10,8 +10,15 @@
     @Html.AntiForgeryToken()
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="alert alert-info">In order to <strong>add gigs</strong> you must register as a group representative:</div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.IsGroupRepresentative, new { @class = "col-md-2 control-label" })
+        <div id="registerCheckBox">
+            @Html.CheckBoxFor(m => m.IsGroupRepresentative, new { @class = "form-control", @id = "isGroupRepresentative" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label", id = "js-name-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
         </div>
@@ -34,15 +41,19 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    <div class="alert alert-info">In order to <strong>add gigs</strong> you must register as a group representative:</div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.IsGroupRepresentative, new { @class = "col-md-2 control-label" })
-        <div id="registerCheckBox">
-            @Html.CheckBoxFor(m => m.IsGroupRepresentative, new { @class = "form-control", @id = "isGroupRepresentative" })
+    <div id="city">
+        <div class="alert alert-info">
+            To receive <strong>notifications about gigs created in your city</strong> by groups you're following, fill out:
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            </div>
         </div>
     </div>
     <div id="groupData">
-        <div class="alert alert-warning">To <strong>draw attention</strong> to your group, fill out information below (not required):</div>
+        <div class="alert alert-info">To <strong>draw attention</strong> to your group, fill out information below (not required):</div>
         <div class="form-group">
             @Html.LabelFor(m => m.ArtistInfo, new {@class = "col-md-2 control-label" })
             <div class="col-md-10">
@@ -67,15 +78,23 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#groupData").hide();
 
             $("#isGroupRepresentative").change(function() {
-                if(this.checked)
+                if (this.checked) {
                     $("#groupData").fadeIn('slow');
-                else
+                    $("#city").fadeOut('slow');
+                    $("#js-name-label").text("Group Title");
+                } else {
                     $("#groupData").fadeOut('slow');
+                    $("#city").fadeIn('slow');
+                    $("#js-name-label").text("Name");
+                }
             });
+
+            // Uncheck Checkbox on Refresh
+            $(':checkbox:checked').removeAttr('checked');
         });
     </script>
 }

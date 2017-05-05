@@ -13,6 +13,7 @@ namespace GigHub.Core.Models
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
+        public string City { get; set; }
         public bool IsGroupRepresentative { get; set; }
         public string ArtistInfo { get; set; }
         public byte[] Image { get; set; }
