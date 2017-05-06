@@ -34,12 +34,12 @@ namespace GigHub.Persistence.Repositories
                 .ToList();
         }
 
-        public IEnumerable<ApplicationUser> GetNewBands()
+        public List<ApplicationUser> GetNewBands()
         {
             return _context.Users
                 .Where(u => u.IsGroupRepresentative)
                 .OrderByDescending(u => u.RegistrationDate)
-                .Take(4)
+                .Take(12)
                 .ToList();
         }
     }

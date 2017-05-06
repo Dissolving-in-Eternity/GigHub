@@ -313,7 +313,7 @@ div.center-cropped img {
 }
 #newBands {
   display: inline-block;
-  margin-left: 120px;
+  margin-left: 80px;
   margin-top: 60px;
 }
 #newBands h2 {
@@ -323,7 +323,7 @@ div.center-cropped img {
   margin-top: 25px;
   width: 160px;
   height: 200px;
-  display: inline-block;
+  display: inline-flex;
 }
 #newBands .thumbnailSize .thumbnail {
   background-color: transparent;
@@ -331,7 +331,6 @@ div.center-cropped img {
 }
 #newBands .thumbnailSize .thumbnail .caption {
   margin-top: 0px;
-  margin-right: 15px;
   text-align: center;
 }
 #newBands div.center-cropped-sml {
@@ -346,7 +345,22 @@ div.center-cropped img {
   left: 50%;
   position: relative;
   transform: translateX(-50%);
-  display: block;
+}
+#newBands .well {
+  background-color: transparent;
+  border: none;
+}
+#newBands .carousel-control.left,
+#newBands .carousel-control.right {
+  background: none !important;
+  filter: progid: none !important;
+  outline: 0;
+}
+#newBands .carousel .carousel-control {
+  visibility: hidden;
+}
+#newBands .carousel:hover .carousel-control {
+  visibility: visible;
 }
 #gigDetails {
   clear: both;
