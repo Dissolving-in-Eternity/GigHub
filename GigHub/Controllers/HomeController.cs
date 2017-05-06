@@ -1,8 +1,6 @@
 using GigHub.Core;
 using GigHub.Core.ViewModels;
-using Microsoft.AspNet.Identity;
 using PagedList;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace GigHub.Controllers
@@ -37,10 +35,7 @@ namespace GigHub.Controllers
                 UpcomingGigs = upcomingGigs.ToPagedList(pageNumber, pageSize),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs",
-                SearchTerm = query,
-                Attendances = _unitOfWork.Attendances
-                    .GetFutureAttendances(User.Identity.GetUserId())
-                    .ToLookup(a => a.GigId),
+                SearchTerm = query
             };
 
             return View("Gigs", viewModel);

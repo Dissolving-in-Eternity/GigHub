@@ -3,7 +3,6 @@ using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
 using PagedList;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace GigHub.Controllers
@@ -50,9 +49,7 @@ namespace GigHub.Controllers
             {
                 UpcomingGigs = gigs.ToPagedList(pageNumber, pageSize),
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending",
-                Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId),
-                Followings = _unitOfWork.Followings.GetUserFollowings(userId).ToLookup(f => f.FolloweeId)
+                Heading = "Gigs I'm Attending"
             };
 
             return View("Gigs", viewModel);

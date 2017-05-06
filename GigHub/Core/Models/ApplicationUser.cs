@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Security.Claims;
@@ -17,6 +18,7 @@ namespace GigHub.Core.Models
         public bool IsGroupRepresentative { get; set; }
         public string ArtistInfo { get; set; }
         public byte[] Image { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }

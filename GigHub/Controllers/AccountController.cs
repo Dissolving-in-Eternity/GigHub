@@ -3,6 +3,7 @@ using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -159,7 +160,8 @@ namespace GigHub.Controllers
                     Name = model.Name,
                     IsGroupRepresentative = model.IsGroupRepresentative,
                     ArtistInfo = model.ArtistInfo,
-                    City = model.City
+                    City = model.City,
+                    RegistrationDate = DateTime.Now
                 };
 
                 if(upload != null)
@@ -171,8 +173,8 @@ namespace GigHub.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    if (model.IsGroupRepresentative)
-                        UserManager.AddToRole(user.Id, "GroupManager");
+                    await UserManager.AddToRoleAsync(user.Id, 
+                        model.IsGroupRepresentative ? "GroupManager" : "User");
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
