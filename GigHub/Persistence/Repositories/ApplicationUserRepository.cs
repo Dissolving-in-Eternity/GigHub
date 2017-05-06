@@ -33,5 +33,14 @@ namespace GigHub.Persistence.Repositories
                 .Where(f => f.City == city)
                 .ToList();
         }
+
+        public IEnumerable<ApplicationUser> GetNewBands()
+        {
+            return _context.Users
+                .Where(u => u.IsGroupRepresentative)
+                .OrderByDescending(u => u.RegistrationDate)
+                .Take(4)
+                .ToList();
+        }
     }
 }

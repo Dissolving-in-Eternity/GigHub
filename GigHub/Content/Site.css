@@ -304,6 +304,50 @@ div.center-cropped img {
   position: relative;
   transform: translateX(-50%);
 }
+/* RESPONSIVE */
+@media (max-width: 1280px) {
+  #newBands,
+  #myCarousel {
+    visibility: hidden;
+  }
+}
+#newBands {
+  display: inline-block;
+  margin-left: 120px;
+  margin-top: 60px;
+}
+#newBands h2 {
+  text-align: center;
+}
+#newBands .thumbnailSize {
+  margin-top: 25px;
+  width: 160px;
+  height: 200px;
+  display: inline-block;
+}
+#newBands .thumbnailSize .thumbnail {
+  background-color: transparent;
+  border: hidden;
+}
+#newBands .thumbnailSize .thumbnail .caption {
+  margin-top: 0px;
+  margin-right: 15px;
+  text-align: center;
+}
+#newBands div.center-cropped-sml {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+#newBands div.center-cropped-sml img {
+  height: 100%;
+  min-width: 100%;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  display: block;
+}
 #gigDetails {
   clear: both;
 }

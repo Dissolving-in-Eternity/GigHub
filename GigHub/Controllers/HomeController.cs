@@ -35,7 +35,8 @@ namespace GigHub.Controllers
                 UpcomingGigs = upcomingGigs.ToPagedList(pageNumber, pageSize),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs",
-                SearchTerm = query
+                SearchTerm = query,
+                NewBands = _unitOfWork.Users.GetNewBands()
             };
 
             return View("Gigs", viewModel);

@@ -11,16 +11,23 @@
 <div id="home">
     <div id="homeLeft">
         <h1>@Model.Heading</h1>
-        @using (Html.BeginForm("Search", "Gigs"))
+        @if (Model.Heading == "Gigs I'm Attending" && !Model.UpcomingGigs.Any())
         {
-            <div class="form-group">
-                <div id="searchGigs" class="input-group">
-                    @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city...", autofocus = "autofocus" })
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </span>
+            <div class="alert alert-info"><strong>No attendances found</strong>. Pick gig you're going and click 'Going' to attend.</div>
+        }
+        else
+        {
+            using (Html.BeginForm("Search", "Gigs"))
+            {
+                <div class="form-group">
+                    <div id="searchGigs" class="input-group">
+                        @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city...", autofocus = "autofocus" })
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </span>
+                    </div>
                 </div>
-            </div>
+            }
         }
         <ul id="gigs" class="gigs voffset4">
             @foreach (var gig in Model.UpcomingGigs)
@@ -119,6 +126,27 @@
             </a>
         </div>
     }
-
+    
+    @if (User.IsInRole("User") && Model.NewBands != null)
+    {
+        <div id="newBands">
+            <h2>New on GigHub</h2>
+            
+            <div class="row">
+                @foreach (var band in Model.NewBands)
+                {
+                    <div class="thumbnailSize">
+                        <a href="/?query=@band.Name" class="thumbnail">
+                            <div class="center-cropped-sml">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(band.Image)" alt="@band.Name">
+                            </div>
+                            <div class="caption">
+                                <p>@band.Name</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
-

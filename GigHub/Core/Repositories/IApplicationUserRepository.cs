@@ -7,5 +7,6 @@ namespace GigHub.Core.Repositories
     {
         IEnumerable<ApplicationUser> GetArtistsFollowedBy(string userId);
         IEnumerable<ApplicationUser> GetFollowersWithMatchingCityFor(string userId, string city);
+        IEnumerable<ApplicationUser> GetNewBands();
     }
 }
