@@ -22,6 +22,10 @@ span.field-validation-error {
   color: red;
   font-weight: bold;
 }
+.input-validation-error,
+.input-validation-error:focus {
+  border-color: red;
+}
 .voffset {
   margin-top: 2px;
 }
