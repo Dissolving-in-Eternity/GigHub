@@ -1,4 +1,5 @@
-﻿using GigHub.Core;
+﻿using System.Linq;
+using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -37,19 +38,21 @@ namespace GigHub.Controllers
         /// <param name="page">Current page number</param>
         /// <returns>Gigs.chtml populated with gigs user attending</returns>
         [Authorize]
-        public ActionResult Attending(int? page)
+        public ActionResult Attending(int? page, string query = null)
         {
             int pageSize = 4;
             int pageNumber = page ?? 1;
 
             var userId = User.Identity.GetUserId();
-            var gigs = _unitOfWork.Gigs.GetGigsUserAttending(userId);
+            var gigs = _unitOfWork.Gigs.GetGigsUserAttending(userId, query);
 
             var viewModel = new GigsViewModel
             {
                 UpcomingGigs = gigs.ToPagedList(pageNumber, pageSize),
+                ItemsCount = gigs.Count(),
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending"
+                Heading = "Gigs I'm Attending",
+                SearchTerm = query
             };
 
             return View("Gigs", viewModel);
@@ -175,10 +178,12 @@ namespace GigHub.Controllers
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns>Redirect to Home/Index action</returns>
-        [HttpPost]
+        //[HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
         {
-            return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
+            if (viewModel.Heading == "Upcoming Gigs")
+                return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
+            return RedirectToAction("Attending", "Gigs", new { query = viewModel.SearchTerm });
         }
 
         /// <summary>

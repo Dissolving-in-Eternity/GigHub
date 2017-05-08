@@ -39,7 +39,6 @@
     <div id ="content" class="container body-content">
         @RenderBody()
         <footer>
-            <hr />
             <p>&copy; @DateTime.Now.Year - GigHub</p>
         </footer>
     </div>
@@ -123,13 +122,12 @@
                 });
 
             // If no new notifications found, show the old ones
-            if ($(".js-notifications-count").text(""))
-            {
+            if ($(".js-notifications-count").hasClass("hide")) {
                 $.getJSON("/api/notifications/?isNewNotificationsRequired=false",
                     function(notifications) {
                         $(".notifications").popover({
                             html: true,
-                            title: notifications.count > 0 ? "Recent Notifications" : "No Recent Notifications",
+                            title: notifications.length > 0 ? "Recent Notifications" : "No Recent Notifications",
                             content: function() {
                                 // Get generated html for notifications
                                 var compiled = _.template($("#notifications-template").html());
@@ -141,7 +139,6 @@
                         });
                     });
             }
-
         });
     </script>
 </div>

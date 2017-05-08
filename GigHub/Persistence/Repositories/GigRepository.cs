@@ -67,15 +67,25 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public IEnumerable<Gig> GetGigsUserAttending(string userId)
+        public IEnumerable<Gig> GetGigsUserAttending(string userId, string searchTerm = null)
         {
-            return _context.Attendances
+            var attending = _context.Attendances
                 .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
                 .Select(a => a.Gig)
                 .Include(g => g.Artist)
-                .Include(g => g.Genre)
-                .OrderBy(g => g.DateTime)
-                .ToList();
+                .Include(g => g.Genre);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                attending = attending
+                    .Where(g =>
+                        g.Artist.Name.Contains(searchTerm) ||
+                        g.Genre.Name.Contains(searchTerm) ||
+                        g.Venue.Contains(searchTerm) ||
+                        g.City.Contains(searchTerm));
+            }
+
+            return attending.OrderBy(g => g.DateTime).ToList();
         }
 
         public void Add(Gig gig)

@@ -1,6 +1,7 @@
 ﻿<!-- import the included stylesheet for some default styling for paging -->
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
+@using PagedList
 @using PagedList.Mvc
 @model GigHub.Core.ViewModels.GigsViewModel
 @{
@@ -16,8 +17,11 @@
         }
         else
         {
-            using (Html.BeginForm("Search", "Gigs"))
+            using (Html.BeginForm("Search", "Gigs", FormMethod.Post, new { viewModel = Model }))
             {
+                // In order to pass the viewmodel with non-null Heading
+                @Html.HiddenFor(m => m.Heading);
+
                 <div class="form-group">
                     <div id="searchGigs" class="input-group">
                         @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by artist, genre, city...", autofocus = "autofocus" })
@@ -60,14 +64,17 @@
             }
         </ul>
         
-        <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-        @if (Model.Heading == "Upcoming Gigs")
+        @if (Model.ItemsCount > 3)
         {
-            @Html.PagedListPager(Model.UpcomingGigs, page => Url.Action("Index", "Home", new {page}))
-        }
-        else
-        {
-            @Html.PagedListPager(Model.UpcomingGigs, page => Url.Action("Attending", "Gigs", new {page}))
+            <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+             if (Model.Heading == "Upcoming Gigs")
+             {
+                 @Html.PagedListPager(Model.UpcomingGigs, page => Url.Action("Index", "Home", new { page, query = Model.SearchTerm }))
+             }
+             else
+             {
+                 @Html.PagedListPager(Model.UpcomingGigs, page => Url.Action("Attending", "Gigs", new { page, query = Model.SearchTerm }))
+             }
         }
     </div>
     
