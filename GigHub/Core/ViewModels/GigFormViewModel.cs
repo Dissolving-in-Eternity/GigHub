@@ -19,7 +19,7 @@ namespace GigHub.Core.ViewModels
         public string City { get; set; }
 
         [Required] 
-        [FutureDate]
+        [FutureDate(ErrorMessage = "Date should be in the future.")]
         public string Date { get; set; }
 
         [Required]

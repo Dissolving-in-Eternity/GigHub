@@ -146,6 +146,7 @@ namespace GigHub.Controllers
         {
             if (!ModelState.IsValid)
             {
+                viewModel.Heading = "Add a Gig";
                 viewModel.Genres = _unitOfWork.Genres.GetGenres();
                 return View("GigForm", viewModel);
             }
