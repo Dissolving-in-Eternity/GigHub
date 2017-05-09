@@ -276,6 +276,11 @@ h6,
   display: inline-block;
   margin-left: 16px;
 }
+#file-selector {
+  display: inline-block;
+  margin-left: 16px;
+  margin-top: 5px;
+}
 /* Gig Details */
 #artistHeading h2 {
   margin-bottom: -2px;

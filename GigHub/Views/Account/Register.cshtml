@@ -61,10 +61,17 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Image", new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                <input type="file" name="upload"/>
+            @Html.Label("Image", new { @class = "control-label col-md-2" })
+            <div id="file-selector">
+                <label class="btn btn-primary" for="my-file-selector">
+                    <input id="my-file-selector" name="upload" type="file" style="display:none;" onchange="$('#upload-file-info').html(this.files[0].name);">
+                    Browse...
+                </label>
+                <span class='label label-info' id="upload-file-info"></span>
             </div>
+            @*<div class="col-md-10">
+                <input type="file" name="upload" />
+            </div>*@
         </div>
     </div>
     <div class="form-group">

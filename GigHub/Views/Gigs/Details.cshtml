@@ -25,7 +25,10 @@
 
 <div id="artistInfo">
     <div id="artistImg" class="center-cropped">
-        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Gig.Artist.Image)" />
+        @if (Model.Gig.Artist.Image != null)
+        { <img src="data:image;base64,@Convert.ToBase64String(Model.Gig.Artist.Image)" alt="@Model.Gig.Artist.Name"> }
+        else 
+        { <img src="/Content/images/sorry-image-not-available.png", alt="Image not available"/> }
     </div>
     <div id="artistText">
         <p>@Model.Gig.Artist.ArtistInfo</p>
