@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using GigHub.Core;
+﻿using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace GigHub.Controllers
@@ -157,7 +157,7 @@ namespace GigHub.Controllers
                 DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue,
-                City = viewModel.City,
+                City = viewModel.City
             };
 
             _unitOfWork.Gigs.Add(gig);
