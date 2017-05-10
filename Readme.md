@@ -19,10 +19,10 @@ Mini social network for live music lovers.
 * Animate.css
 
 ### Testing
-* MS Tests
+* MSTest
+* NUnit
 * Moq
 * Fluent Assertions
-* NUnit
 ***
 
 # Screenshots
